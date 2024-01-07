@@ -1,0 +1,17 @@
+version: '3'
+services:
+  next:
+    build:
+      args:
+        - NODE_VER=${NODE_VER:-20-alpine3.17}
+      context: .
+      dockerfile: Dockerfile
+    tty: true
+    volumes:
+      - ${HOST_DIR:-./src}:/usr/src
+      - node_modules:/usr/src/node_modules
+    command: npm run dev # after build
+    ports:
+      - "${HOST_PORT:-3000}:3000"
+volumes:
+  node_modules:
