@@ -13,5 +13,7 @@ services:
     command: npm run dev # after build
     ports:
       - "${HOST_PORT:-3000}:3000"
+    environment:
+      - WATCHPACK_POLLING=true
 volumes:
   node_modules:
