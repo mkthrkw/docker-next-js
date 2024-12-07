@@ -1,19 +1,9 @@
-version: '3'
 services:
   next:
-    build:
-      args:
-        - NODE_VER=${NODE_VER:-20-alpine3.17}
-      context: .
-      dockerfile: Dockerfile
-    tty: true
+    image: ${NODE_IMAGE:-node:20-alpine}
+    working_dir: /usr/src
     volumes:
       - ${HOST_DIR:-./src}:/usr/src
-      - node_modules:/usr/src/node_modules
-    command: npm run dev # after build
+    command: npm run dev
     ports:
       - "${HOST_PORT:-3000}:3000"
-    environment:
-      - WATCHPACK_POLLING=true
-volumes:
-  node_modules:
